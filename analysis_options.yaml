@@ -16,6 +16,8 @@ analyzer:
     avoid_redundant_argument_values: ignore
     depend_on_referenced_packages: ignore
     avoid_bool_literals_in_conditional_expressions: ignore
+    avoid_print: ignore
+    avoid_annotating_with_dynamic: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:

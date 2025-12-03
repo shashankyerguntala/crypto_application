@@ -11,6 +11,9 @@ class AppRouter {
         path: RoutesConstants.loginRoute,
         builder: (BuildContext context, GoRouterState state) => LoginScreen(),
       ),
+      ShellRoute(routes: [
+        GoRoute(path: '/')
+      ])
     ],
   );
 }
