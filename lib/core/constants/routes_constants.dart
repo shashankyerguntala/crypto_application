@@ -1,5 +1,6 @@
 class RoutesConstants {
   static String loginRoute = '/login';
+  static String registerRoute = '/register';
   static String dashboardRoute = '/home';
   static String details = '/details';
   static String profileRoute = '/profile';

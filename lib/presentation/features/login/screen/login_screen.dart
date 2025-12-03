@@ -2,6 +2,7 @@ import 'package:final_l3/core/constants/routes_constants.dart';
 import 'package:final_l3/core/constants/string_constants.dart';
 import 'package:final_l3/core/di/di.dart';
 import 'package:final_l3/core/helper_functions.dart';
+import 'package:final_l3/core/themes/app_text_styles.dart';
 import 'package:final_l3/core/themes/custom_elevated_button.dart';
 import 'package:final_l3/presentation/features/login/bloc/login_bloc.dart';
 
@@ -83,7 +84,10 @@ class LoginBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 16,
             children: [
-              Text(StringConstants.signInLabel, style: TextStyle(fontSize: 32)),
+              Text(
+                StringConstants.signInLabel,
+                style: const TextStyle(fontSize: 32),
+              ),
 
               CustomForm(
                 formKey: formKey,
@@ -94,6 +98,7 @@ class LoginBody extends StatelessWidget {
                   context.read<LoginBloc>().add(ObscureEvent());
                 },
               ),
+
               CustomElevatedButton(
                 isLoading: state is Loginloading,
                 label: StringConstants.signInLabel,
@@ -107,6 +112,18 @@ class LoginBody extends StatelessWidget {
                     );
                   }
                 },
+              ),
+
+              const SizedBox(height: 12),
+
+              TextButton(
+                onPressed: () {
+                  context.push(RoutesConstants.registerRoute);
+                },
+                child: Text(
+                  StringConstants.dontHaveAnAccount,
+                  style: AppTextStyles.bodyLarge,
+                ),
               ),
             ],
           ),

@@ -3,7 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:final_l3/core/enums/http_methods.dart';
 import 'package:final_l3/core/network/error_handler.dart';
 import 'package:final_l3/core/network/failure.dart';
-import 'package:final_l3/core/network/logger_interceptor.dart';
+import 'package:final_l3/core/network/interceptors/logger_interceptor.dart';
+import 'package:final_l3/core/network/interceptors/retry_interceptor.dart';
 
 class DioClient {
   final Dio dio;
@@ -18,7 +19,7 @@ class DioClient {
           responseType: ResponseType.json,
         ),
       ) {
-    dio.interceptors.add(LoggerInterceptor());
+    dio.interceptors.addAll([LoggerInterceptor(), RetryInterceptor(dio: dio)]);
   }
 
   Future<Either<Failure, T>> request<T>(

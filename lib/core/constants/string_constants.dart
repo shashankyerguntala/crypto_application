@@ -11,4 +11,7 @@ class StringConstants {
   static String crypto = 'Crypto';
   static String retry = 'Retry';
   static String favourites = 'Favourites';
+  static String marketStats = "Market Statistics";
+  static String profile = "Profile";
+  static String dontHaveAnAccount ="Don't have an account? Sign Up";
 }

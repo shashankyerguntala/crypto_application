@@ -1,4 +1,5 @@
 import 'package:final_l3/core/constants/string_constants.dart';
+import 'package:final_l3/core/themes/app_text_styles.dart';
 import 'package:final_l3/core/themes/custom_elevated_button.dart';
 import 'package:final_l3/presentation/features/coin_details/widgets/coin_chart.dart';
 import 'package:final_l3/presentation/features/coin_details/widgets/coin_details_header.dart';
@@ -38,10 +39,8 @@ class CoinDetailsScreen extends StatelessWidget {
           const SizedBox(height: 30),
 
           Text(
-            "Market Statistics",
-            style: Theme.of(
-              context,
-            ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
+            StringConstants.marketStats,
+            style: AppTextStyles.headlineMedium,
           ),
           const SizedBox(height: 12),
 

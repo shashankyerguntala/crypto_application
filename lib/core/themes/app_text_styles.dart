@@ -1,0 +1,35 @@
+import 'package:final_l3/core/constants/color_constants.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class AppTextStyles {
+  static final TextStyle headlineLarge = GoogleFonts.poppins(
+    fontSize: 28,
+    fontWeight: FontWeight.w700,
+    color: ColorConstants.primary,
+  );
+
+  static final TextStyle headlineMedium = GoogleFonts.poppins(
+    fontSize: 22,
+    fontWeight: FontWeight.w600,
+    color: ColorConstants.primary,
+  );
+
+  static final TextStyle bodyLarge = GoogleFonts.poppins(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: ColorConstants.primary,
+  );
+
+  static final TextStyle bodyMedium = GoogleFonts.poppins(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: ColorConstants.primary,
+  );
+
+  static final TextStyle label = GoogleFonts.poppins(
+    fontSize: 13,
+    fontWeight: FontWeight.w500,
+    color: ColorConstants.primary,
+  );
+}
