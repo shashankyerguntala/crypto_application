@@ -10,4 +10,16 @@ class AuthLocalDataSource {
   String? getUserPassword(String email) {
     return usersBox.get(email);
   }
+
+  Future<void> setCurrentUser(String email) async {
+    await usersBox.put('currentUser', email);
+  }
+
+  String? getCurrentUser() {
+    return usersBox.get('currentUser');
+  }
+
+  Future<void> clearCurrentUser() async {
+    await usersBox.delete('currentUser');
+  }
 }

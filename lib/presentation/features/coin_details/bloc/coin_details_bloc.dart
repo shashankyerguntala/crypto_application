@@ -21,17 +21,23 @@ class CoinDetailsBloc extends Bloc<CoinDetailsEvent, CoinDetailsState> {
     emit(FavouriteAddLoading());
 
     try {
-      final list = hiveUseCase.getFavourites();
+      final email = hiveUseCase.getCurrentUser();
+      if (email == null) {
+        emit(FavouriteAddError(StringConstants.userNotLoggedIn));
+        return;
+      }
 
-      final exists = list.any((coin) => coin.id == event.coin.id);
+      final favs = hiveUseCase.getFavourites(email);
+
+      final exists = favs.any((c) => c.id == event.coin.id);
       if (exists) {
         emit(FavouriteAddError(StringConstants.alreadyFav));
         return;
       }
 
-      list.add(event.coin);
+      favs.add(event.coin);
 
-      await hiveUseCase.saveFavourites(list);
+      await hiveUseCase.saveFavourites(email, favs);
 
       emit(FavouriteAddSuccess());
     } catch (e) {

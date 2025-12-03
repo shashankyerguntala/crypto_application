@@ -117,9 +117,7 @@ class LoginBody extends StatelessWidget {
               const SizedBox(height: 12),
 
               TextButton(
-                onPressed: () {
-                  context.push(RoutesConstants.registerRoute);
-                },
+                onPressed: () => context.push(RoutesConstants.registerRoute),
                 child: Text(
                   StringConstants.dontHaveAnAccount,
                   style: AppTextStyles.bodyLarge,

@@ -1,4 +1,5 @@
 import 'package:final_l3/core/constants/color_constants.dart';
+import 'package:final_l3/core/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -37,7 +38,9 @@ class CustomElevatedButton extends StatelessWidget {
             ? CircularProgressIndicator()
             : Text(
                 label,
-                style: TextStyle(color: ColorConstants.white, fontSize: 16),
+                style: AppTextStyles.bodyMedium.copyWith(
+                  color: ColorConstants.white,
+                ),
               ),
       ),
     );

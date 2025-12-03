@@ -14,6 +14,7 @@ import 'package:final_l3/domain/usecase/crypto_usecase.dart';
 import 'package:final_l3/domain/usecase/hive_usecase.dart';
 import 'package:final_l3/presentation/features/coin_details/bloc/coin_details_bloc.dart';
 import 'package:final_l3/presentation/features/favourites/bloc/favourites_bloc.dart';
+import 'package:final_l3/presentation/features/profile/bloc/profile_bloc.dart';
 import 'package:final_l3/presentation/features/register/bloc/register_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -75,11 +76,17 @@ class Di {
     //! bloc
 
     di.registerFactory<LoginBloc>(() => LoginBloc(di<AuthUsecase>()));
-    di.registerFactory<RegisterBloc>(() => RegisterBloc(di<AuthUsecase>()));
+    di.registerFactory<RegisterBloc>(
+      () => RegisterBloc(
+        authUsecase: di<AuthUsecase>(),
+        hiveUseCase: di<HiveUseCase>(),
+      ),
+    );
     di.registerFactory<DashboardBloc>(() => DashboardBloc(di<CryptoUsecase>()));
     di.registerFactory<CoinDetailsBloc>(
       () => CoinDetailsBloc(di<HiveUseCase>()),
     );
+    di.registerFactory<ProfileBloc>(() => ProfileBloc(di<HiveUseCase>()));
     di.registerFactory<FavouritesBloc>(() => FavouritesBloc(di<HiveUseCase>()));
   }
 }

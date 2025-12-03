@@ -4,12 +4,17 @@ abstract class HiveRepository {
   Future<void> saveUser(String email, String password);
   String? getUserPassword(String email);
 
-  Future<void> saveFavourites(List<CryptoModel> coins);
-  List<CryptoModel> getFavourites();
+  Future<void> setCurrentUser(String email);
+  String? getCurrentUser();
 
-  Future<void> saveMarketCache(List<CryptoModel> coins);
-  List<CryptoModel>? getMarketCache();
+  Future<void> saveFavourites(String email, List<CryptoModel> coins);
+  List<CryptoModel> getFavourites(String email);
+
+  Future<void> saveCoinCache(List<CryptoModel> coins);
+  List<CryptoModel>? getCoinCache();
 
   Future<void> saveIsDark({required bool isDark});
   bool getIsDark();
+
+  Future<void> clearCurrentUser();
 }

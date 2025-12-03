@@ -27,14 +27,14 @@ class AuthRepositoryImpl implements AuthRepository {
 
       final existing = local.getUserPassword(email);
       if (existing != null) {
-        return Left(Failure(msg: "User already exists"));
+        return Left(Failure(msg: StringConstants.userAlreadyExists));
       }
 
       await local.saveUser(email, password);
 
       return Right(UserEntity(email: email));
     } catch (e) {
-      return Left(Failure(msg: "Registration failed"));
+      return Left(Failure(msg: StringConstants.registrationFailed));
     }
   }
 
@@ -47,16 +47,16 @@ class AuthRepositoryImpl implements AuthRepository {
       final savedPassword = local.getUserPassword(email);
 
       if (savedPassword == null) {
-        return Left(Failure(msg: "User not found"));
+        return Left(Failure(msg: StringConstants.userNotFound));
       }
 
       if (savedPassword != password) {
-        return Left(Failure(msg: "Incorrect password"));
+        return Left(Failure(msg: StringConstants.incorrectPassword));
       }
 
       return Right(UserEntity(email: email));
     } catch (e) {
-      return Left(Failure(msg: "Login failed"));
+      return Left(Failure(msg: StringConstants.loginFailed));
     }
   }
 }

@@ -11,18 +11,24 @@ class HiveUseCase {
 
   String? getUserPassword(String email) => repo.getUserPassword(email);
 
-  Future<void> saveFavourites(List<CryptoModel> coins) =>
-      repo.saveFavourites(coins);
+  Future<void> setCurrentUser(String email) => repo.setCurrentUser(email);
 
-  List<CryptoModel> getFavourites() => repo.getFavourites();
+  String? getCurrentUser() => repo.getCurrentUser();
+
+  Future<void> saveFavourites(String email, List<CryptoModel> coins) =>
+      repo.saveFavourites(email, coins);
+
+  List<CryptoModel> getFavourites(String email) => repo.getFavourites(email);
 
   Future<void> saveMarketCache(List<CryptoModel> coins) =>
-      repo.saveMarketCache(coins);
+      repo.saveCoinCache(coins);
 
-  List<CryptoModel>? getMarketCache() => repo.getMarketCache();
+  List<CryptoModel>? getMarketCache() => repo.getCoinCache();
 
   Future<void> saveTheme({required bool isDark}) =>
       repo.saveIsDark(isDark: isDark);
 
   bool getTheme() => repo.getIsDark();
+
+  Future<void> clearCurrentUser() => repo.clearCurrentUser();
 }

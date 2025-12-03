@@ -17,13 +17,13 @@ class ErrorHandler {
         return Failure(msg: StringConstants.invalid);
 
       case DioExceptionType.cancel:
-        return Failure(msg: "Request was cancelled");
+        return Failure(msg: StringConstants.requestCancelled);
 
       case DioExceptionType.badResponse:
         return badResponse(e);
 
       case DioExceptionType.unknown:
-        return Failure(msg: 'unexpected !');
+        return Failure(msg: StringConstants.unexpected);
     }
   }
 
@@ -32,7 +32,7 @@ class ErrorHandler {
     final message =
         e.response?.data?['message']?.toString() ??
         e.response?.statusMessage ??
-        "Unexpected error";
+        StringConstants.unexpected;
 
     if (status >= 400 && status < 500) {
       return ClientFailure(msg: message);

@@ -22,7 +22,13 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
   ) async {
     emit(FavouritesLoading());
     try {
-      final list = hiveUseCase.getFavourites();
+      final email = hiveUseCase.getCurrentUser();
+      if (email == null) {
+        emit(FavouritesError(StringConstants.userNotLoggedIn));
+        return;
+      }
+
+      final list = hiveUseCase.getFavourites(email);
       emit(FavouritesLoaded(list));
     } catch (e) {
       emit(FavouritesError(StringConstants.failedToLoadFav));
@@ -34,12 +40,18 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
     Emitter<FavouritesState> emit,
   ) async {
     try {
-      final list = hiveUseCase.getFavourites();
+      final email = hiveUseCase.getCurrentUser();
+      if (email == null) {
+        emit(FavouritesError(StringConstants.userNotLoggedIn));
+        return;
+      }
+
+      final list = hiveUseCase.getFavourites(email);
 
       final exists = list.any((c) => c.id == event.coin.id);
       if (!exists) {
         list.add(event.coin);
-        await hiveUseCase.saveFavourites(list);
+        await hiveUseCase.saveFavourites(email, list);
       }
 
       emit(FavouritesLoaded(List.from(list)));
@@ -53,11 +65,17 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
     Emitter<FavouritesState> emit,
   ) async {
     try {
-      final list = hiveUseCase.getFavourites();
+      final email = hiveUseCase.getCurrentUser();
+      if (email == null) {
+        emit(FavouritesError(StringConstants.userNotLoggedIn));
+        return;
+      }
+
+      final list = hiveUseCase.getFavourites(email);
 
       list.removeWhere((c) => c.id == event.coinId);
 
-      await hiveUseCase.saveFavourites(list);
+      await hiveUseCase.saveFavourites(email, list);
 
       emit(FavouritesLoaded(List.from(list)));
     } catch (e) {

@@ -29,23 +29,38 @@ class HiveRepositoryImpl implements HiveRepository {
   }
 
   @override
-  Future<void> saveFavourites(List<CryptoModel> coins) {
-    return favourites.saveFavourites(coins);
+  Future<void> setCurrentUser(String email) {
+    return auth.setCurrentUser(email);
   }
 
   @override
-  List<CryptoModel> getFavourites() {
-    return favourites.getFavourites();
+  String? getCurrentUser() {
+    return auth.getCurrentUser();
   }
 
   @override
-  Future<void> saveMarketCache(List<CryptoModel> coins) {
+  Future<void> saveFavourites(String email, List<CryptoModel> coins) {
+    return favourites.saveFavourites(email, coins);
+  }
+
+  @override
+  List<CryptoModel> getFavourites(String email) {
+    return favourites.getFavourites(email);
+  }
+
+  @override
+  Future<void> saveCoinCache(List<CryptoModel> coins) {
     return cache.saveCoinCache(coins);
   }
 
   @override
-  List<CryptoModel>? getMarketCache() {
+  List<CryptoModel>? getCoinCache() {
     return cache.getCoinCache();
+  }
+
+  @override
+  Future<void> saveIsDark({required bool isDark}) {
+    return settings.saveIsDarkTheme(isDark: isDark);
   }
 
   @override
@@ -54,7 +69,5 @@ class HiveRepositoryImpl implements HiveRepository {
   }
 
   @override
-  Future<void> saveIsDark({required bool isDark}) {
-    return settings.saveIsDarkTheme(isDark: isDark);
-  }
+  Future<void> clearCurrentUser() => auth.clearCurrentUser();
 }

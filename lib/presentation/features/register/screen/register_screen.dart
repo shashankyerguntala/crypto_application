@@ -1,3 +1,4 @@
+import 'package:final_l3/core/constants/routes_constants.dart';
 import 'package:final_l3/core/constants/string_constants.dart';
 import 'package:final_l3/core/di/di.dart';
 import 'package:final_l3/core/helper_functions.dart';
@@ -59,7 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     context,
                     isError: false,
                   );
-                  context.pop();
+                  context.pop(RegisterScreen());
                 }
               },
               builder: (context, state) {
@@ -72,7 +73,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       Text(
                         StringConstants.signUp,
-                        style: AppTextStyles.bodyMedium,
+                        style: AppTextStyles.headlineLarge,
                       ),
 
                       Form(
@@ -104,7 +105,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ],
                         ),
                       ),
-
+                      TextButton(
+                        onPressed: () => context.go(RoutesConstants.loginRoute),
+                        child: Text(StringConstants.alreadyaUser),
+                      ),
                       CustomElevatedButton(
                         label: StringConstants.signUp,
                         isLoading: state is RegisterLoading,

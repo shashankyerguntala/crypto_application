@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:final_l3/core/constants/api_constants.dart';
+import 'package:final_l3/core/constants/string_constants.dart';
 import 'package:final_l3/core/network/dio_client.dart';
 import 'package:final_l3/core/network/failure.dart';
 import 'package:final_l3/core/enums/http_methods.dart';
@@ -17,14 +19,14 @@ class CryptoRemoteDataSourceImpl implements CryptoRemoteDataSource {
   Future<Either<Failure, List<CryptoModel>>> getMarketCoins() async {
     return client.request<List<CryptoModel>>(
       HttpMethods.get,
-      "/coins/markets",
+      ApiConstants.getCoins,
       queryParams: {
-        "vs_currency": "usd",
-        "order": "market_cap_desc",
-        "per_page": 100,
-        "page": 1,
-        "sparkline": false,
-        "price_change_percentage": "1h,24h",
+        StringConstants.vsCurrency: StringConstants.usd,
+        StringConstants.order: StringConstants.marketCapDesc,
+        StringConstants.perPage: 20,
+        StringConstants.page: 1,
+        StringConstants.sparkline: false,
+        StringConstants.priceChangePercentage: StringConstants.priceChange1h24h,
       },
       parser: (data) {
         final list = data as List<dynamic>;

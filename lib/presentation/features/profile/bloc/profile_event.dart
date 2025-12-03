@@ -8,3 +8,5 @@ sealed class ProfileEvent extends Equatable {
 }
 
 final class LoadProfile extends ProfileEvent {}
+
+final class LogoutEvent extends ProfileEvent {}

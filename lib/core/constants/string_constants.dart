@@ -2,6 +2,7 @@ class StringConstants {
   static String emailEmpty = "Email can't be empty";
   static String passEmpty = "Password can't be empty";
   static String signInLabel = 'Sign In';
+  static String alreadyaUser = 'Already a User?';
   static String emailLabel = 'email';
   static String passwordLabel = 'Password';
   static String testEmail = 'test@gmail.com';
@@ -11,26 +12,60 @@ class StringConstants {
   static String crypto = 'Crypto';
   static String retry = 'Retry';
   static String favourites = 'Favourites';
-  static String marketStats = "Market Statistics";
-  static String profile = "Profile";
+  static String marketStats = 'Market Statistics';
+  static String profile = 'Profile';
+  static String userNotLoggedIn = 'User Not Logged in';
+  static String userNotFound = 'User Not found';
   static String dontHaveAnAccount = "Don't have an account? Sign Up";
-  static String logout = "Logout";
-  static String darkTheme = "Dark Theme";
+  static String logout = 'Logout';
+  static String cancel = 'cancel';
+  static String remove = 'remove';
+  static const incorrectPassword = 'Incorrect password';
+  static const loginFailed = 'Login failed';
+  static String darkTheme = 'Dark Theme';
+
   static String emailRegex = r'^[^@]+@[^@]+\.[^@]+$';
-  static String invalidMail = "Invalid email format";
-  static String passLengthShort = "Password must be at least 8 characters";
+
+  static RegExp alphaNumRegex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]+$');
+
+  static String invalidMail = 'Invalid email format';
+  static String passLengthShort = 'Password must be at least 8 characters';
   static String chart = 'Chart';
   static String signUp = 'Sign Up';
   static String userRegisteredSuccess = 'User Registered successfully';
-  static String connectionTimedOut = "Connection timed out";
-  static String noInternetConnection = "No Internet Connection";
-  static String invalid = "Invalid certificate";
-  static String alreadyFav = "Already in favourites";
-  static String failedToAdd = "Failed to add to favourites";
-  static String passRegex = "Failed to add to favourites";
-  static String favouritesAddSuccess = "Added to favourites";
-  static String failedToLoadFav = "Failed to load favourites";
-  static String failedToAddFav = "Failed to add favourites";
-  static String failedToRemoveFav = "Failed to remove favourite";
-  static String noFavYet = "No Favourites Yet";
+  static String connectionTimedOut = 'Connection timed out';
+  static String noInternetConnection = 'No Internet Connection';
+  static String invalid = 'Invalid certificate';
+  static String alreadyFav = 'Already in favourites';
+  static String failedToAdd = 'Failed to add to favourites';
+
+  static String passRegex = 'Password does not match required pattern';
+
+  static String favouritesAddSuccess = 'Added to favourites';
+  static String failedToLoadFav = 'Failed to load favourites';
+  static String failedToAddFav = 'Failed to add favourites';
+  static String failedToRemoveFav = 'Failed to remove favourite';
+  static String noFavYet = 'No Favourites Yet';
+  static String removeFavourite = 'Remove Favourite';
+  static String areuSureWantToRemove =
+      'Are you sure you want to remove this coin from favourites?';
+  static String registered = 'Registered';
+  static String requestCancelled = 'Request was cancelled';
+  static String unexpected = 'unexpected !';
+  static String failedToFetchUser = 'Failed to fetch User';
+  static String passNotStrong = 'Password not strong';
+  static String logoutSuccess = 'Logout Successful';
+
+  static const vsCurrency = 'vs_currency';
+  static const order = 'order';
+  static const perPage = 'per_page';
+  static const page = 'page';
+
+  static const priceChangePercentage = 'price_change_percentage';
+
+  static const usd = 'usd';
+  static const marketCapDesc = 'market_cap_desc';
+  static const priceChange1h24h = '1h,24h';
+  static const userAlreadyExists = 'User already exists';
+  static const registrationFailed = 'Registration failed';
 }

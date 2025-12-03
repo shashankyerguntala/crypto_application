@@ -1,5 +1,7 @@
 import 'package:final_l3/core/constants/string_constants.dart';
+import 'package:final_l3/core/constants/color_constants.dart';
 import 'package:final_l3/core/themes/app_text_styles.dart';
+import 'package:final_l3/presentation/features/dashboard/widgets/custom_dialogue_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:final_l3/core/di/di.dart';
@@ -24,7 +26,16 @@ class FavouriteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(StringConstants.favourites)),
+      appBar: AppBar(
+        title: Text(
+          StringConstants.favourites,
+          style: AppTextStyles.headlineMedium.copyWith(
+            color: ColorConstants.white,
+          ),
+        ),
+        backgroundColor: ColorConstants.primary,
+        elevation: 2,
+      ),
 
       body: BlocBuilder<FavouritesBloc, FavouritesState>(
         builder: (context, state) {
@@ -33,7 +44,14 @@ class FavouriteView extends StatelessWidget {
           }
 
           if (state is FavouritesError) {
-            return Center(child: Text(state.message));
+            return Center(
+              child: Text(
+                state.message,
+                style: AppTextStyles.bodyLarge.copyWith(
+                  color: ColorConstants.error,
+                ),
+              ),
+            );
           }
 
           if (state is FavouritesLoaded) {
@@ -43,7 +61,9 @@ class FavouriteView extends StatelessWidget {
               return Center(
                 child: Text(
                   StringConstants.noFavYet,
-                  style: AppTextStyles.headlineMedium,
+                  style: AppTextStyles.headlineMedium.copyWith(
+                    color: ColorConstants.primary,
+                  ),
                 ),
               );
             }
@@ -51,11 +71,29 @@ class FavouriteView extends StatelessWidget {
             return ListView.separated(
               padding: const EdgeInsets.all(16),
               itemCount: coins.length,
-              separatorBuilder: (_, _) => const SizedBox(height: 12),
+              separatorBuilder: (_, __) => const SizedBox(height: 12),
               itemBuilder: (context, index) {
                 final coin = coins[index];
 
-                return CryptoCard(coin: coin, favoriteScreen: true);
+                return CryptoCard(
+                  coin: coin,
+                  favoriteScreen: true,
+                  onDelete: () async {
+                    final confirm = await showDialog<bool>(
+                      context: context,
+                      builder: (_) => CustomDialogBox(
+                        title: StringConstants.removeFavourite,
+                        message: StringConstants.areuSureWantToRemove,
+                      ),
+                    );
+
+                    if (confirm == true) {
+                      context.read<FavouritesBloc>().add(
+                        RemoveFavouriteEvent(coin.id),
+                      );
+                    }
+                  },
+                );
               },
             );
           }

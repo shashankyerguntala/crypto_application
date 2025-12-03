@@ -1,15 +1,19 @@
 import 'package:bloc/bloc.dart';
+import 'package:final_l3/core/constants/string_constants.dart';
 import 'package:final_l3/domain/usecase/auth_usecase.dart';
+import 'package:final_l3/domain/usecase/hive_usecase.dart';
 import 'package:meta/meta.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  final AuthUsecase usecase;
+  final AuthUsecase authUsecase;
+  final HiveUseCase hiveUseCase;
   bool isObscure = true;
 
-  RegisterBloc(this.usecase) : super(RegisterInitial()) {
+  RegisterBloc({required this.authUsecase, required this.hiveUseCase})
+    : super(RegisterInitial()) {
     on<RegisterClicked>(onRegisterClicked);
     on<TogglePass>(onTogglePass);
   }
@@ -20,12 +24,19 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   ) async {
     emit(RegisterLoading());
 
-    final result = await usecase.register(event.email, event.password);
+    final result = await authUsecase.register(event.email, event.password);
 
-    result.fold(
-      (fail) => emit(RegisterError(msg: fail.msg)),
-      (user) => emit(RegisterSuccess(msg: '${user.email} Registered')),
-    );
+    if (result.isLeft()) {
+      final fail = result.fold((err) => err, (user) => null);
+      emit(RegisterError(msg: fail!.msg));
+      return;
+    }
+
+    final user = result.fold((l) => null, (user) => user)!;
+
+    await hiveUseCase.setCurrentUser(user.email);
+
+    emit(RegisterSuccess(msg: '${user.email} ${StringConstants.registered}'));
   }
 
   void onTogglePass(TogglePass event, Emitter<RegisterState> emit) {

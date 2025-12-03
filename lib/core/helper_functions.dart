@@ -33,8 +33,13 @@ class HelperFunctions {
     if (value == null || value.isEmpty) {
       return StringConstants.passEmpty;
     }
+
     if (value.length < 8) {
       return StringConstants.passLengthShort;
+    }
+
+    if (!StringConstants.alphaNumRegex.hasMatch(value)) {
+      return StringConstants.passNotStrong;
     }
 
     return null;

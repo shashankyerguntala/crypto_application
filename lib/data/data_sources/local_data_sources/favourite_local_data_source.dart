@@ -4,13 +4,14 @@ import 'package:hive_flutter/hive_flutter.dart';
 class FavouriteLocalDataSource {
   final Box favouritesBox = Hive.box('favouritesBox');
 
-  Future<void> saveFavourites(List<CryptoModel> coins) async {
+  Future<void> saveFavourites(String email, List<CryptoModel> coins) async {
     final jsonList = coins.map((c) => c.toJson()).toList();
-    await favouritesBox.put('favourites', jsonList);
+    await favouritesBox.put(email, jsonList);
   }
 
-  List<CryptoModel> getFavourites() {
-    final raw = favouritesBox.get('favourites', defaultValue: []);
+  List<CryptoModel> getFavourites(String email) {
+    final raw = favouritesBox.get(email, defaultValue: []);
+
     if (raw is! List) {
       return [];
     }

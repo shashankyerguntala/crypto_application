@@ -28,7 +28,6 @@ class CryptoCard extends StatelessWidget {
     return Card(
       elevation: 2,
       surfaceTintColor: ColorConstants.white,
-
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
@@ -124,12 +123,11 @@ class CryptoCard extends StatelessWidget {
                 ],
               ),
 
-              favoriteScreen == true
-                  ? IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.red),
-                      onPressed: onDelete,
-                    )
-                  : const SizedBox.shrink(),
+              if (favoriteScreen == true)
+                IconButton(
+                  icon: Icon(Icons.delete, color: ColorConstants.error),
+                  onPressed: onDelete,
+                ),
             ],
           ),
         ),
