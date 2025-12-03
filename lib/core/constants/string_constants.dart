@@ -22,4 +22,11 @@ class StringConstants {
   static String chart = 'Chart';
   static String signUp = 'Sign Up';
   static String userRegisteredSuccess = 'User Registered successfully';
+  static String connectionTimedOut = "Connection timed out";
+  static String noInternetConnection = "No Internet Connection";
+  static String invalid = "Invalid certificate";
+  static String alreadyFav = "Already in favourites";
+  static String failedToAdd = "Failed to add to favourites";
+  static String passRegex = "Failed to add to favourites";
+  static String favouritesAddSuccess = "Added to favourites";
 }

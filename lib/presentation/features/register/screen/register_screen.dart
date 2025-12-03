@@ -66,60 +66,62 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 final bloc = context.read<RegisterBloc>();
                 final obscure = state is Obscured ? state.obscure : true;
 
-                return Column(
-                  spacing: 16,
-                  children: [
-                    Text(
-                      StringConstants.signUp,
-                      style: AppTextStyles.bodyMedium,
-                    ),
+                return SingleChildScrollView(
+                  child: Column(
+                    spacing: 16,
+                    children: [
+                      Text(
+                        StringConstants.signUp,
+                        style: AppTextStyles.bodyMedium,
+                      ),
 
-                    Form(
-                      key: formKey,
-                      child: Column(
-                        spacing: 16,
-                        children: [
-                          CustomTextField(
-                            controller: emailController,
-                            label: StringConstants.emailLabel,
-                            validator: HelperFunctions.validateEmail,
-                          ),
+                      Form(
+                        key: formKey,
+                        child: Column(
+                          spacing: 16,
+                          children: [
+                            CustomTextField(
+                              controller: emailController,
+                              label: StringConstants.emailLabel,
+                              validator: HelperFunctions.validateEmail,
+                            ),
 
-                          CustomTextField(
-                            controller: passwordController,
-                            label: StringConstants.passwordLabel,
-                            obscureText: obscure,
-                            isPassword: true,
-                            validator: HelperFunctions.validatePassword,
-                            suffixIcon: IconButton(
-                              onPressed: () => bloc.add(TogglePass()),
-                              icon: Icon(
-                                obscure
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
+                            CustomTextField(
+                              controller: passwordController,
+                              label: StringConstants.passwordLabel,
+                              obscureText: obscure,
+                              isPassword: true,
+                              validator: HelperFunctions.validatePassword,
+                              suffixIcon: IconButton(
+                                onPressed: () => bloc.add(TogglePass()),
+                                icon: Icon(
+                                  obscure
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
 
-                    CustomElevatedButton(
-                      label: StringConstants.signUp,
-                      isLoading: state is RegisterLoading,
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                        if (formKey.currentState!.validate()) {
-                          bloc.add(
-                            RegisterClicked(
-                              email: emailController.text.trim(),
-                              password: passwordController.text.trim(),
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                  ],
+                      CustomElevatedButton(
+                        label: StringConstants.signUp,
+                        isLoading: state is RegisterLoading,
+                        onPressed: () {
+                          FocusScope.of(context).unfocus();
+                          if (formKey.currentState!.validate()) {
+                            bloc.add(
+                              RegisterClicked(
+                                email: emailController.text.trim(),
+                                password: passwordController.text.trim(),
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 );
               },
             ),

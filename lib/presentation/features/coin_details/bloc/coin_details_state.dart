@@ -1,10 +1,23 @@
 part of 'coin_details_bloc.dart';
 
-sealed class CoinDetailsState extends Equatable {
+abstract class CoinDetailsState extends Equatable {
   const CoinDetailsState();
-  
+
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
-final class CoinDetailsInitial extends CoinDetailsState {}
+class CoinDetailsInitial extends CoinDetailsState {}
+
+class FavouriteAddLoading extends CoinDetailsState {}
+
+class FavouriteAddSuccess extends CoinDetailsState {}
+
+class FavouriteAddError extends CoinDetailsState {
+  final String message;
+
+  const FavouriteAddError(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}

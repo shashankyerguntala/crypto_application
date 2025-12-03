@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:final_l3/core/constants/string_constants.dart';
 import 'package:final_l3/core/network/failure.dart';
 
 class ErrorHandler {
@@ -7,13 +8,13 @@ class ErrorHandler {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.receiveTimeout:
       case DioExceptionType.sendTimeout:
-        return Failure(msg: "Connection timed out");
+        return Failure(msg: StringConstants.connectionTimedOut);
 
       case DioExceptionType.connectionError:
-        return Failure(msg: "No Internet Connection");
+        return Failure(msg: StringConstants.noInternetConnection);
 
       case DioExceptionType.badCertificate:
-        return Failure(msg: "Invalid SSL certificate");
+        return Failure(msg: StringConstants.invalid);
 
       case DioExceptionType.cancel:
         return Failure(msg: "Request was cancelled");

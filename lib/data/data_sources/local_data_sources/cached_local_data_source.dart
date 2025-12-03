@@ -4,13 +4,13 @@ import 'package:final_l3/data/models/crypto_model.dart';
 class CacheLocalDataSource {
   final Box cacheBox = Hive.box('cacheBox');
 
-  Future<void> saveMarketCache(List<CryptoModel> coins) async {
-    final jsonList = coins.map((c) => c.toJson()).toList();
-    await cacheBox.put('market', jsonList);
+  Future<void> saveCoinCache(List<CryptoModel> coins) async {
+    final jsonList = coins.map((coin) => coin.toJson()).toList();
+    await cacheBox.put('coin', jsonList);
   }
 
-  List<CryptoModel>? getMarketCache() {
-    final data = cacheBox.get('market');
+  List<CryptoModel>? getCoinCache() {
+    final data = cacheBox.get('coin');
     if (data == null) {
       return null;
     }

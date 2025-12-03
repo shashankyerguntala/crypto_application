@@ -17,20 +17,6 @@ class CryptoModel extends CryptoEntity {
   });
 
   factory CryptoModel.fromJson(Map<String, dynamic> json) {
-    double toDouble(value) {
-      if (value is num) {
-        return value.toDouble();
-      }
-      return double.tryParse(value) ?? 0.0;
-    }
-
-    int toInt(value) {
-      if (value is num) {
-        return value.toInt();
-      }
-      return int.tryParse(value) ?? 0;
-    }
-
     return CryptoModel(
       id: json["id"] ?? "",
       symbol: json["symbol"] ?? "",
@@ -47,18 +33,69 @@ class CryptoModel extends CryptoEntity {
     );
   }
 
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "symbol": symbol,
-    "name": name,
-    "image": image,
-    "current_price": currentPrice,
-    "market_cap": marketCap,
-    "market_cap_rank": marketCapRank,
-    "high_24h": high24h,
-    "low_24h": low24h,
-    "price_change_24h": priceChange24h,
-    "price_change_percentage_24h": priceChangePercentage24h,
-    "price_change_percentage_1h_in_currency": priceChange1h,
-  };
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "symbol": symbol,
+      "name": name,
+      "image": image,
+      "current_price": currentPrice,
+      "market_cap": marketCap,
+      "market_cap_rank": marketCapRank,
+      "high_24h": high24h,
+      "low_24h": low24h,
+      "price_change_24h": priceChange24h,
+      "price_change_percentage_24h": priceChangePercentage24h,
+      "price_change_percentage_1h_in_currency": priceChange1h,
+    };
+  }
+
+  CryptoEntity toEntity() {
+    return CryptoEntity(
+      id: id,
+      symbol: symbol,
+      name: name,
+      image: image,
+      currentPrice: currentPrice,
+      marketCap: marketCap,
+      marketCapRank: marketCapRank,
+      high24h: high24h,
+      low24h: low24h,
+      priceChange24h: priceChange24h,
+      priceChangePercentage24h: priceChangePercentage24h,
+      priceChange1h: priceChange1h,
+    );
+  }
+
+  static double toDouble(dynamic value) {
+    if (value == null) {
+      return 0.0;
+    }
+    if (value is int) {
+      return value.toDouble();
+    }
+    if (value is double) {
+      return value;
+    }
+    if (value is String) {
+      return double.tryParse(value) ?? 0.0;
+    }
+    return 0.0;
+  }
+
+  static int toInt(dynamic value) {
+    if (value == null) {
+      return 0;
+    }
+    if (value is int) {
+      return value;
+    }
+    if (value is double) {
+      return value.toInt();
+    }
+    if (value is String) {
+      return int.tryParse(value) ?? 0;
+    }
+    return 0;
+  }
 }

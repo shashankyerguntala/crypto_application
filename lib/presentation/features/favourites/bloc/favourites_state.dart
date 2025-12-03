@@ -8,3 +8,4 @@ sealed class FavouritesState extends Equatable {
 }
 
 final class FavouritesInitial extends FavouritesState {}
+
