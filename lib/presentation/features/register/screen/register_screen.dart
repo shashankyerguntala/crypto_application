@@ -1,10 +1,13 @@
+import 'package:final_l3/core/constants/string_constants.dart';
 import 'package:final_l3/core/di/di.dart';
 import 'package:final_l3/core/helper_functions.dart';
+import 'package:final_l3/core/themes/app_text_styles.dart';
 import 'package:final_l3/core/themes/custom_elevated_button.dart';
 import 'package:final_l3/presentation/features/login/widgets/custom_text_field.dart';
 import 'package:final_l3/presentation/features/register/bloc/register_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -40,90 +43,85 @@ class _RegisterScreenState extends State<RegisterScreen> {
         body: Padding(
           padding: const EdgeInsets.all(16),
           child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                spacing: 16,
-                children: [
-                  const Text('Sign Up', style: TextStyle(fontSize: 32)),
+            child: BlocConsumer<RegisterBloc, RegisterState>(
+              listener: (context, state) {
+                if (state is RegisterError) {
+                  HelperFunctions.showSnackBar(
+                    state.msg,
+                    context,
+                    isError: true,
+                  );
+                }
 
-                  Form(
-                    key: formKey,
-                    child: Column(
-                      spacing: 16,
-                      children: [
-                        CustomTextField(
-                          controller: emailController,
-                          label: 'Email',
-                          validator: HelperFunctions.validateEmail,
-                        ),
+                if (state is RegisterSuccess) {
+                  HelperFunctions.showSnackBar(
+                    StringConstants.userRegisteredSuccess,
+                    context,
+                    isError: false,
+                  );
+                  context.pop();
+                }
+              },
+              builder: (context, state) {
+                final bloc = context.read<RegisterBloc>();
+                final obscure = state is Obscured ? state.obscure : true;
 
-                        BlocBuilder<RegisterBloc, RegisterState>(
-                          buildWhen: (prev, curr) => curr is Obscured,
-                          builder: (context, state) {
-                            final obscure = state is Obscured
-                                ? state.obscure
-                                : true;
-
-                            return CustomTextField(
-                              controller: passwordController,
-                              label: 'Password',
-                              isPassword: true,
-                              obscureText: obscure,
-                              validator: HelperFunctions.validatePassword,
-                              suffixIcon: IconButton(
-                                onPressed: () => context
-                                    .read<RegisterBloc>()
-                                    .add(TogglePass()),
-                                icon: Icon(
-                                  obscure
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                return Column(
+                  spacing: 16,
+                  children: [
+                    Text(
+                      StringConstants.signUp,
+                      style: AppTextStyles.bodyMedium,
                     ),
-                  ),
 
-                  BlocBuilder<RegisterBloc, RegisterState>(
-                    buildWhen: (prev, curr) =>
-                        curr is RegisterLoading || curr is RegisterError,
-                    builder: (context, state) {
-                      return CustomElevatedButton(
-                        label: 'Sign Up',
-                        isLoading: state is RegisterLoading,
-                        onPressed: () {
-                          FocusScope.of(context).unfocus();
-                          if (formKey.currentState!.validate()) {
-                            context.read<RegisterBloc>().add(
-                              RegisterClicked(
-                                email: emailController.text.trim(),
-                                password: passwordController.text.trim(),
+                    Form(
+                      key: formKey,
+                      child: Column(
+                        spacing: 16,
+                        children: [
+                          CustomTextField(
+                            controller: emailController,
+                            label: StringConstants.emailLabel,
+                            validator: HelperFunctions.validateEmail,
+                          ),
+
+                          CustomTextField(
+                            controller: passwordController,
+                            label: StringConstants.passwordLabel,
+                            obscureText: obscure,
+                            isPassword: true,
+                            validator: HelperFunctions.validatePassword,
+                            suffixIcon: IconButton(
+                              onPressed: () => bloc.add(TogglePass()),
+                              icon: Icon(
+                                obscure
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
                               ),
-                            );
-                          }
-                        },
-                      );
-                    },
-                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
 
-                  BlocListener<RegisterBloc, RegisterState>(
-                    listenWhen: (_, curr) => curr is RegisterSuccess,
-                    listener: (context, state) {
-                      if (state is RegisterSuccess) {
-                        HelperFunctions.showSnackBar(
-                          '',
-                          context,
-                          isError: false,
-                        );
-                      }
-                    },
-                    child: const SizedBox(),
-                  ),
-                ],
-              ),
+                    CustomElevatedButton(
+                      label: StringConstants.signUp,
+                      isLoading: state is RegisterLoading,
+                      onPressed: () {
+                        FocusScope.of(context).unfocus();
+                        if (formKey.currentState!.validate()) {
+                          bloc.add(
+                            RegisterClicked(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ),

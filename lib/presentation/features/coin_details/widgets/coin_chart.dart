@@ -1,3 +1,4 @@
+import 'package:final_l3/core/constants/string_constants.dart';
 import 'package:flutter/material.dart';
 
 class CoinChartPlaceholder extends StatelessWidget {
@@ -12,8 +13,11 @@ class CoinChartPlaceholder extends StatelessWidget {
         color: Colors.grey.withAlpha(8),
         borderRadius: BorderRadius.circular(14),
       ),
-      child: const Center(
-        child: Text("Chart Coming Soon", style: TextStyle(color: Colors.grey)),
+      child: Center(
+        child: Text(
+          StringConstants.chart,
+          style: TextStyle(color: Colors.grey),
+        ),
       ),
     );
   }

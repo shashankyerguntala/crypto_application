@@ -13,5 +13,13 @@ class StringConstants {
   static String favourites = 'Favourites';
   static String marketStats = "Market Statistics";
   static String profile = "Profile";
-  static String dontHaveAnAccount ="Don't have an account? Sign Up";
+  static String dontHaveAnAccount = "Don't have an account? Sign Up";
+  static String logout = "Logout";
+  static String darkTheme = "Dark Theme";
+  static String emailRegex = r'^[^@]+@[^@]+\.[^@]+$';
+  static String invalidMail = "Invalid email format";
+  static String passLengthShort = "Password must be at least 8 characters";
+  static String chart = 'Chart';
+  static String signUp = 'Sign Up';
+  static String userRegisteredSuccess = 'User Registered successfully';
 }

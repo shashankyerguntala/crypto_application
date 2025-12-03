@@ -1,6 +1,9 @@
 import 'package:final_l3/core/constants/color_constants.dart';
+import 'package:final_l3/core/constants/routes_constants.dart';
 import 'package:final_l3/core/constants/string_constants.dart';
+import 'package:final_l3/core/themes/theme_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -20,11 +23,11 @@ class ProfileScreen extends StatelessWidget {
 
           Center(
             child: CircleAvatar(
-              radius: 45,
+              radius: 44,
               backgroundColor: ColorConstants.primary.withAlpha(15),
               child: Icon(
                 Icons.person,
-                size: 55,
+                size: 52,
                 color: ColorConstants.primary,
               ),
             ),
@@ -42,23 +45,36 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 30),
+          const SizedBox(height: 28),
           const Divider(),
 
           const SizedBox(height: 20),
 
-          ListTile(
-            leading: const Icon(Icons.dark_mode_outlined),
-            title: const Text("Dark Theme"),
-            trailing: Switch(value: false, onChanged: (v) {}),
+          ValueListenableBuilder<bool>(
+            valueListenable: ThemeController.isDarkMode,
+            builder: (context, isDark, _) {
+              return ListTile(
+                leading: const Icon(Icons.dark_mode_outlined),
+                title: Text(StringConstants.darkTheme),
+                trailing: Switch(
+                  value: isDark,
+                  onChanged: (value) {
+                    ThemeController.isDarkMode.value = value;
+                  },
+                ),
+              );
+            },
           ),
 
-          const SizedBox(height: 10),
+          const SizedBox(height: 8),
 
           ListTile(
-            leading: const Icon(Icons.logout, color: Colors.red),
-            title: const Text("Logout", style: TextStyle(color: Colors.red)),
-            onTap: () {},
+            leading: Icon(Icons.logout, color: ColorConstants.error),
+            title: Text(
+              StringConstants.logout,
+              style: TextStyle(color: ColorConstants.error),
+            ),
+            onTap: () => context.go(RoutesConstants.loginRoute),
           ),
         ],
       ),

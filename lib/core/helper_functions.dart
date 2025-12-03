@@ -14,7 +14,7 @@ class HelperFunctions {
           msg,
           style: TextStyle(color: ColorConstants.white, fontSize: 14),
         ),
-        backgroundColor: (isError ? Colors.red : Colors.green).withAlpha(90),
+        backgroundColor: (isError ? Colors.red : Colors.green),
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 2),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -33,7 +33,10 @@ class HelperFunctions {
     if (value == null || value.isEmpty) {
       return StringConstants.passEmpty;
     }
-    
+    if (value.length < 8) {
+      return StringConstants.passLengthShort;
+    }
+
     return null;
   }
 }

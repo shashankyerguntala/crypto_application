@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:final_l3/core/constants/string_constants.dart';
 import 'package:final_l3/core/network/failure.dart';
 import 'package:final_l3/data/data_sources/local_data_sources/auth_local_data_source.dart';
 import 'package:final_l3/domain/entity/user_entity.dart';
@@ -10,12 +11,8 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this.local);
 
   bool validEmail(String email) {
-    final regex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
+    final regex = RegExp(StringConstants.emailRegex);
     return regex.hasMatch(email);
-  }
-
-  bool validPassword(String password) {
-    return password.length >= 8;
   }
 
   @override
@@ -25,11 +22,7 @@ class AuthRepositoryImpl implements AuthRepository {
   ) async {
     try {
       if (!validEmail(email)) {
-        return Left(Failure(msg: "Invalid email format"));
-      }
-
-      if (!validPassword(password)) {
-        return Left(Failure(msg: "Password must be at least 8 characters"));
+        return Left(Failure(msg: StringConstants.invalidMail));
       }
 
       final existing = local.getUserPassword(email);

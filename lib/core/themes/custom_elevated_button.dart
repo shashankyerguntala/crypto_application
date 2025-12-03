@@ -1,3 +1,4 @@
+import 'package:final_l3/core/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -26,15 +27,18 @@ class CustomElevatedButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: ColorConstants.primaryLight,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
-            side: BorderSide(color: Colors.grey.shade100),
+            side: BorderSide(color: ColorConstants.grey),
           ),
         ),
         child: isLoading
             ? CircularProgressIndicator()
-            : Text(label, style: TextStyle(color: Colors.white, fontSize: 16)),
+            : Text(
+                label,
+                style: TextStyle(color: ColorConstants.white, fontSize: 16),
+              ),
       ),
     );
   }
