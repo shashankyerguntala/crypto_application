@@ -21,14 +21,14 @@ class CryptoModel extends CryptoEntity {
       if (value is num) {
         return value.toDouble();
       }
-      return double.tryParse(value.toString()) ?? 0.0;
+      return double.tryParse(value) ?? 0.0;
     }
 
     int toInt(value) {
       if (value is num) {
         return value.toInt();
       }
-      return int.tryParse(value.toString()) ?? 0;
+      return int.tryParse(value) ?? 0;
     }
 
     return CryptoModel(
