@@ -1,3 +1,4 @@
+import 'package:final_l3/core/constants/routes_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -5,7 +6,11 @@ class BottomShell extends StatelessWidget {
   final Widget child;
   const BottomShell({required this.child, super.key});
 
-  static const tabs = ['/dashboard', '/favourites', '/profile'];
+  static List tabs = [
+    RoutesConstants.dashboardRoute,
+    RoutesConstants.favouritesRoute,
+    RoutesConstants.profileRoute,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +29,6 @@ class BottomShell extends StatelessWidget {
   }
 
   int index(BuildContext context) {
-    // final location = GoRouterState.of(context).uri.toString();
     final location = GoRouterState.of(context).matchedLocation;
     return tabs.indexWhere((tab) => location.startsWith(tab));
   }

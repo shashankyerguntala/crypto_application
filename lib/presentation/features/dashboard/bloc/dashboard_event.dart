@@ -1,8 +1,12 @@
 part of 'dashboard_bloc.dart';
 
-sealed class DashboardEvent extends Equatable {
+abstract class DashboardEvent extends Equatable {
   const DashboardEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
+
+class LoadDashboardData extends DashboardEvent {}
+
+class RefreshDashboardData extends DashboardEvent {}

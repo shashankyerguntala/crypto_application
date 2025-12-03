@@ -1,4 +1,4 @@
-import 'package:final_l3/domain/entity/coin_entity.dart';
+import 'package:final_l3/domain/entity/crypto_entity.dart';
 
 class CryptoModel extends CryptoEntity {
   const CryptoModel({

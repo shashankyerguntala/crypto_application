@@ -1,3 +1,4 @@
+import 'package:final_l3/core/constants/routes_constants.dart';
 import 'package:final_l3/core/constants/string_constants.dart';
 import 'package:final_l3/core/di/di.dart';
 import 'package:final_l3/core/helper_functions.dart';
@@ -68,7 +69,7 @@ class LoginBody extends StatelessWidget {
       listener: (context, state) {
         if (state is LoginSuccess) {
           HelperFunctions.showSnackBar(state.msg, context, isError: false);
-          context.go('');
+          context.go(RoutesConstants.dashboardRoute);
         } else if (state is LoginError) {
           HelperFunctions.showSnackBar(state.msg, context, isError: true);
         }

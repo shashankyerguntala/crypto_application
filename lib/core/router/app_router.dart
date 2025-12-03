@@ -1,6 +1,6 @@
 import 'package:final_l3/core/constants/routes_constants.dart';
 import 'package:final_l3/core/router/bottom_shell.dart';
-import 'package:final_l3/domain/entity/coin_entity.dart';
+import 'package:final_l3/domain/entity/crypto_entity.dart';
 import 'package:final_l3/presentation/features/coin_details/screens/coin_details_screen.dart';
 import 'package:final_l3/presentation/features/dashboard/screens/dashboard_screen.dart';
 import 'package:final_l3/presentation/features/favourites/screens/favourite_screen.dart';

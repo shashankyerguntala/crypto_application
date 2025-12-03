@@ -8,4 +8,7 @@ class StringConstants {
   static String testPass = 'test@123';
   static String loginSuccess = 'Login Successful';
   static String enterValidCred = 'Enter valid credentials';
+  static String crypto = 'Crypto';
+  static String retry = 'Retry';
+  static String favourites = 'Favourites';
 }

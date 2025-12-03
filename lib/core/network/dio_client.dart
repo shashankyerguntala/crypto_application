@@ -24,7 +24,7 @@ class DioClient {
   Future<Either<Failure, T>> request<T>(
     HttpMethods method,
     String endpoint, {
-    required T Function(Map<String, dynamic>) parser,
+    required T Function(dynamic) parser,
     Map<String, dynamic>? queryParams,
     data,
   }) async {
