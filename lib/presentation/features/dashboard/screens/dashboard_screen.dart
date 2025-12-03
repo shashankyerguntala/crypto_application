@@ -2,13 +2,13 @@ import 'package:final_l3/domain/entity/coin_entity.dart';
 import 'package:final_l3/presentation/features/dashboard/widgets/crypto_card.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  final List<CryptoEntity> coins;
-
-  const HomePage({required this.coins, super.key});
+class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    //!
+    final List<CryptoEntity> coins = [];
     return Scaffold(
       appBar: AppBar(title: const Text("Crypto"), elevation: 2),
 

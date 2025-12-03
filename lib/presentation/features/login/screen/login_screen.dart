@@ -7,6 +7,7 @@ import 'package:final_l3/presentation/features/login/bloc/login_bloc.dart';
 import 'package:final_l3/presentation/features/login/widgets/custom_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -67,6 +68,7 @@ class LoginBody extends StatelessWidget {
       listener: (context, state) {
         if (state is LoginSuccess) {
           HelperFunctions.showSnackBar(state.msg, context, isError: false);
+          context.go('');
         } else if (state is LoginError) {
           HelperFunctions.showSnackBar(state.msg, context, isError: true);
         }

@@ -11,7 +11,6 @@ class CoinChart extends StatelessWidget {
     if (prices.isEmpty) {
       return const SizedBox(height: 120);
     }
-
     final isPositive = prices.last >= prices.first;
 
     return SizedBox(
