@@ -25,7 +25,7 @@ class CryptoRemoteDataSourceImpl implements CryptoRemoteDataSource {
         StringConstants.order: StringConstants.marketCapDesc,
         StringConstants.perPage: 20,
         StringConstants.page: 1,
-        StringConstants.sparkline: false,
+
         StringConstants.priceChangePercentage: StringConstants.priceChange1h24h,
       },
       parser: (data) {
