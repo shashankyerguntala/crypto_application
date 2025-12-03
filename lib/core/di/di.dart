@@ -13,6 +13,7 @@ import 'package:final_l3/domain/usecase/auth_usecase.dart';
 import 'package:final_l3/domain/usecase/crypto_usecase.dart';
 import 'package:final_l3/domain/usecase/hive_usecase.dart';
 import 'package:final_l3/presentation/features/coin_details/bloc/coin_details_bloc.dart';
+import 'package:final_l3/presentation/features/favourites/bloc/favourites_bloc.dart';
 import 'package:final_l3/presentation/features/register/bloc/register_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -79,5 +80,6 @@ class Di {
     di.registerFactory<CoinDetailsBloc>(
       () => CoinDetailsBloc(di<HiveUseCase>()),
     );
+    di.registerFactory<FavouritesBloc>(() => FavouritesBloc(di<HiveUseCase>()));
   }
 }

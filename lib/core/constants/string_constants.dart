@@ -29,4 +29,8 @@ class StringConstants {
   static String failedToAdd = "Failed to add to favourites";
   static String passRegex = "Failed to add to favourites";
   static String favouritesAddSuccess = "Added to favourites";
+  static String failedToLoadFav = "Failed to load favourites";
+  static String failedToAddFav = "Failed to add favourites";
+  static String failedToRemoveFav = "Failed to remove favourite";
+  static String noFavYet = "No Favourites Yet";
 }
